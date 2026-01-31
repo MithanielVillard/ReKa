@@ -8,12 +8,18 @@ end
 
 option("backend")
 	set_default("portaudio")
+	set_description("Change audio backend used by ReKa")
 	set_values("portaudio", "miniaudio")
+	set_showmenu(true)
+
 
 target("ReKa")
     set_kind("binary")
+	add_options("backend")
 	add_includedirs("include", {public = true})
+	add_includedirs("include/$(backend)", {public = true})
     add_files("src/*.cpp")
+	add_files("src/$(backend)/*.cpp")
 	add_packages("portaudio", "miniaudio")
 
 --

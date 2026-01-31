@@ -14,6 +14,8 @@ enum ErrorStatus
 
 struct Error
 {
+	Error(ErrorStatus status, std::string message) : status(status), message(message) {};
+
 	ErrorStatus status;
 	std::string message;
 };
