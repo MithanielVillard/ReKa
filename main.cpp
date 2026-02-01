@@ -19,6 +19,5 @@ int main(int argc, char **argv)
 	std::shared_ptr<reka::Device> device = reka::CreateDevice(config);
 	device->Start();
 
-
     return 0;
 }
