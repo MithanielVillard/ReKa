@@ -17,8 +17,8 @@ int main(int argc, char **argv)
 	config.sampleRate = 48000;
 	config.pAudioCallback = ProcessCallback;
 	std::shared_ptr<reka::Device> device = reka::CreateDevice(config);
+	device->Start();
 
-    std::cout << "hello world!" << std::endl;
 
     return 0;
 }

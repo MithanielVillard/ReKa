@@ -1,10 +1,19 @@
 #include "portaudio/PortAudioDevice.h"
+#include "Device.h"
 #include "types.h"
 
 #include <portaudio.h>
-
 namespace reka
 {
+	PortAudioDevice::PortAudioDevice(DeviceConfig config) : Device(config)
+	{
+		Init(config);
+	}
+
+	PortAudioDevice::~PortAudioDevice()
+	{
+		Uninit();
+	}
 
 	int32 PortAudioDevice::TranslateFormat(DeviceFormat const format)
 	{
@@ -36,12 +45,10 @@ namespace reka
 		if(err != paNoError)
 			return {REKA_FAILED, "Failed to initialize Portaudio : " + std::string(Pa_GetErrorText(err), 34)};
 
-		return {REKA_OK, ""};
 
 		m_config = config;
 
-		PaStream* pStream;
-		err = Pa_OpenDefaultStream(&pStream, 0, 2, 
+		err = Pa_OpenDefaultStream(&m_pStream, 0, 2, 
 			static_cast<PaSampleFormat>(TranslateFormat(config.format)), config.sampleRate, 256, &paStreamCallback, this);
 		if(err != paNoError)
 			return {REKA_FAILED, "Failed to open Portaudio stream : " + std::string(Pa_GetErrorText(err), 34)};

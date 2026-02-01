@@ -11,8 +11,8 @@ namespace reka
 class PortAudioDevice : public Device
 {
 public:
-	PortAudioDevice(DeviceConfig config) : Device(config) {}
-	~PortAudioDevice() override = default;
+	PortAudioDevice(DeviceConfig config);  
+	~PortAudioDevice() override;
 
 	Error Init(DeviceConfig config) override;
 	Error Uninit() override;

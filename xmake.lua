@@ -2,6 +2,8 @@ add_rules("mode.debug", "mode.release")
 
 add_requires("portaudio", "miniaudio")
 
+set_languages("c++20")
+
 if is_mode("debug") then
 	add_defines("DEBUG")
 end
@@ -20,7 +22,7 @@ target("ReKa")
 	add_includedirs("include/$(backend)", {public = true})
     add_files("src/*.cpp")
 	add_files("src/$(backend)/*.cpp")
-	add_packages("portaudio", "miniaudio")
+	add_packages("$(backend)")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
